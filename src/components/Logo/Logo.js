@@ -2,6 +2,7 @@ import React from "react";
 // React Tilt docs: https://www.npmjs.com/package/react-tilt
 import Tilt from "react-tilt";
 import "./Logo.css";
+import brain from "./brain.png";
 
 const Logo = () => {
   return (
@@ -11,7 +12,10 @@ const Logo = () => {
         options={{ max: 55 }}
         style={{ height: 150, width: 150 }}
       >
-        <div className="Tilt-inner"> 👽 </div>
+        <div className="Tilt-inner pa3">
+          {" "}
+          <img style={{ paddingTop: "5px" }} alt="logo" src={brain} />{" "}
+        </div>
       </Tilt>
     </div>
   );
