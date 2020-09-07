@@ -1,3 +1,19 @@
+/* CSS input style: https://www.w3schools.com/css/css_form.asp */
+input {
+  border: none;
+  background: none;
+  border-bottom: 2px solid white;
+  outline: none;
+  color: white;
+}
+
+button {
+  outline: none;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
 .form {
   width: 700px;
   background: #474747;

@@ -8,12 +8,6 @@ body {
   background: #292929;
 }
 
-button {
-  cursor: pointer;
-  border: none;
-  background: none;
-}
-
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
