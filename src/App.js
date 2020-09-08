@@ -12,7 +12,7 @@ const particlesOptions = {
       value: 300,
     },
     size: {
-      value: 3,
+      value: 1,
     },
   },
   interactivity: {
@@ -25,20 +25,37 @@ const particlesOptions = {
   },
 };
 
-function App() {
-  return (
-    <div className="App">
-      <Particles className="particles" params={particlesOptions} />
-      <Navigation />
-      <Logo />
-      <Rank />
-      <ImageLinkForm />
+class App extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      input: "",
+    };
+  }
 
-      {/* 
-        
-        <FaceRecognition />} */}
-    </div>
-  );
+  onInputChange = (event) => {
+    console.log(event.target.value);
+  };
+
+  onButtonSubmit = () => {
+    console.log("clicked");
+  };
+
+  render() {
+    return (
+      <div className="App">
+        <Particles className="particles" params={particlesOptions} />
+        <Navigation />
+        <Logo />
+        <Rank />
+        <ImageLinkForm
+          onInputChange={this.onInputChange}
+          onButtonSubmit={this.onButtonSubmit}
+        />
+        {/* <FaceRecognition />} */}
+      </div>
+    );
+  }
 }
 
 export default App;
