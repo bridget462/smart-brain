@@ -36,7 +36,8 @@ class App extends React.Component {
     super();
     this.state = {
       input: "",
-      imageUrl: "",
+      imageUrl:
+        "https://images.unsplash.com/photo-1583888287045-c35cd9c25584?ixlib=rb-1.2.1&auto=format&fit=crop&w=2734&q=80",
     };
   }
 
@@ -48,10 +49,12 @@ class App extends React.Component {
     console.log("clicked");
     this.setState({ imageUrl: this.state.input });
     // Clarifai face API Docs: https://docs.clarifai.com/
-    app.models.predict(Clarifai.COLOR_MODEL, this.state.input).then(
+    app.models.predict(Clarifai.FACE_DETECT_MODEL, this.state.input).then(
       function (response) {
         // do something with response
-        console.log(response);
+        console.log(
+          response.outputs[0].data.regions[0].region_info.bounding_box
+        );
       },
       function (err) {
         // there was an error
