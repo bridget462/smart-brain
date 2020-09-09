@@ -38,8 +38,32 @@ class App extends React.Component {
       input: "",
       imageUrl:
         "https://images.unsplash.com/photo-1583888287045-c35cd9c25584?ixlib=rb-1.2.1&auto=format&fit=crop&w=2734&q=80",
+      box: {},
     };
   }
+
+  calculateFaceLocation = (data) => {
+    // TODO handle multi detection
+    const clarifaiFace =
+      data.outputs[0].data.regions[0].region_info.bounding_box;
+
+    const image = document.getElementById("inputImage");
+    const width = Number(image.width);
+    const height = Number(image.height);
+
+    // convert detected region % to absolute pixel value
+    return {
+      leftCol: clarifaiFace.left_col * width,
+      topRow: clarifaiFace.top_row * height,
+      rightCol: width - clarifaiFace.right_col * width,
+      bottomRow: height - clarifaiFace.bottom_row * height,
+    };
+  };
+
+  displayFaceBox = (box) => {
+    this.setState({ box: box });
+    console.log(box);
+  };
 
   onInputChange = (event) => {
     this.setState({ input: event.target.value });
@@ -49,17 +73,12 @@ class App extends React.Component {
     console.log("clicked");
     this.setState({ imageUrl: this.state.input });
     // Clarifai face API Docs: https://docs.clarifai.com/
-    app.models.predict(Clarifai.FACE_DETECT_MODEL, this.state.input).then(
-      function (response) {
-        // do something with response
-        console.log(
-          response.outputs[0].data.regions[0].region_info.bounding_box
-        );
-      },
-      function (err) {
-        // there was an error
-      }
-    );
+    app.models
+      .predict(Clarifai.FACE_DETECT_MODEL, this.state.input)
+      .then((response) => {
+        this.displayFaceBox(this.calculateFaceLocation(response));
+      })
+      .catch((err) => console.log("error:", err));
   };
 
   render() {
@@ -73,7 +92,7 @@ class App extends React.Component {
           onInputChange={this.onInputChange}
           onButtonSubmit={this.onButtonSubmit}
         />
-        <FaceRecognition imageUrl={this.state.imageUrl} />
+        <FaceRecognition box={this.state.box} imageUrl={this.state.imageUrl} />
       </div>
     );
   }
