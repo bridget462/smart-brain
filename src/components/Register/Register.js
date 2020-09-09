@@ -1,14 +1,14 @@
 import React from "react";
 
-const SignIn = ({ onRouteChange }) => {
+const Register = ({ onRouteChange }) => {
   return (
     <article className="br2 ba white b--white-10 mv4 w-50-m w-25-l mw6 center shadow-5">
       <article className="pa4 white-80">
         <form action="sign-up_submit" method="get" accept-charset="utf-8">
           <fieldset id="sign_up" className="ba b--transparent ph0 mh0">
-            <legend className="ph0 mh0 fw6 clip">Sign In</legend>
+            <legend className="ph0 mh0 fw6 clip">Register</legend>
             <div className="f1">
-              <p>Sign In</p>
+              <p>Register</p>
             </div>
             <div className="mt3">
               <label className="db fw4 lh-copy f6" for="email-address">
@@ -37,14 +37,9 @@ const SignIn = ({ onRouteChange }) => {
             <input
               className="b ph3 pv2 input-reset ba b--white bg-transparent grow pointer f6"
               type="submit"
-              value="Sign In"
+              value="Register"
               onClick={() => onRouteChange("home")}
             />
-          </div>
-          <div>
-            <p className="pointer" onClick={() => onRouteChange("register")}>
-              Register
-            </p>
           </div>
         </form>
       </article>
@@ -52,4 +47,4 @@ const SignIn = ({ onRouteChange }) => {
   );
 };
 
-export default SignIn;
+export default Register;

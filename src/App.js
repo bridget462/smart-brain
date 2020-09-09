@@ -1,12 +1,17 @@
 import React from "react";
 import "./App.css";
+
+// Components
 import Navigation from "./components/Navigation/Navigation";
 import FaceRecognition from "./components/FaceRecognition/FaceRecognition";
 import Logo from "./components/Logo/Logo";
 import ImageLinkForm from "./components/ImageLinkForm/ImageLinkForm";
 import SignIn from "./components/SignIn/SignIn";
+import Register from "./components/Register/Register";
 import Rank from "./components/Rank/Rank";
 import Particles from "react-particles-js";
+
+// APIs
 import Clarifai from "clarifai";
 
 const app = new Clarifai.App({
@@ -41,6 +46,7 @@ class App extends React.Component {
         "https://images.unsplash.com/photo-1583888287045-c35cd9c25584?ixlib=rb-1.2.1&auto=format&fit=crop&w=2734&q=80",
       box: {},
       route: "signin",
+      isSignedIn: false,
     };
   }
 
@@ -84,6 +90,11 @@ class App extends React.Component {
   };
 
   onRouteChange = (route) => {
+    if (route === "signout") {
+      this.setState({ isSignedIn: false });
+    } else if (route === "home") {
+      this.setState({ isSignedIn: true });
+    }
     this.setState({ route: route });
   };
 
@@ -91,11 +102,12 @@ class App extends React.Component {
     return (
       <div className="App">
         <Particles className="particles" params={particlesOptions} />
-        <Navigation onRouteChange={this.onRouteChange} />
+        <Navigation
+          isSignedIn={this.state.isSignedIn}
+          onRouteChange={this.onRouteChange}
+        />
 
-        {this.state.route === "signin" ? (
-          <SignIn onRouteChange={this.onRouteChange} />
-        ) : (
+        {this.state.route === "home" ? (
           <div>
             <Logo />
             <Rank />
@@ -108,6 +120,10 @@ class App extends React.Component {
               imageUrl={this.state.imageUrl}
             />
           </div>
+        ) : this.state.route === "signin" ? (
+          <SignIn onRouteChange={this.onRouteChange} />
+        ) : (
+          <Register onRouteChange={this.onRouteChange} />
         )}
       </div>
     );
