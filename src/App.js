@@ -11,13 +11,6 @@ import Register from "./components/Register/Register";
 import Rank from "./components/Rank/Rank";
 import Particles from "react-particles-js";
 
-// APIs
-import Clarifai from "clarifai";
-
-const app = new Clarifai.App({
-  apiKey: "f7b7aaa7cc1d4c6d9b7c3599a3ef6567",
-});
-
 const particlesOptions = {
   particles: {
     number: {
@@ -111,11 +104,15 @@ class App extends React.Component {
   };
 
   onButtonSubmit = () => {
-    console.log("clicked");
     this.setState({ imageUrl: this.state.input });
-    // Clarifai face API Docs: https://docs.clarifai.com/
-    app.models
-      .predict(Clarifai.FACE_DETECT_MODEL, this.state.input)
+    fetch("http://localhost:3000/imageurl", {
+      method: "post",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        input: this.state.input,
+      }),
+    })
+      .then((response) => response.json())
       .then((response) => {
         if (response) {
           fetch("http://localhost:3000/image", {
@@ -128,7 +125,8 @@ class App extends React.Component {
             .then((response) => response.json())
             .then((count) => {
               this.setState(Object.assign(this.state.user, { entries: count }));
-            });
+            })
+            .catch(console.log);
         }
         this.displayFaceBox(this.calculateFaceLocation(response));
       })
