@@ -2,6 +2,12 @@ This project is based on Udemy [The Complete Web Developer in 2020: Zero to Mast
 
 # Smart Brain
 
+## How to launch
+
+- start database with `pgAdmin`
+- start server `smart-brain-api`
+- start the site `smart-brain`
+
 ## How to use
 
 Enter image URL and click detect button to recognize faces!
