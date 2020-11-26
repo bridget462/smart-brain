@@ -1,13 +1,16 @@
-This project is based on Udemy [The Complete Web Developer in 2020: Zero to Mastery](https://www.udemy.com/course/the-complete-web-developer-zero-to-mastery/learn/lecture/8915189#overview) course final project and created with [Create React App](https://github.com/facebook/create-react-app).
-
 # Smart Brain
 
-## How to launch
-
-- start database with `pgAdmin`
-- start server `smart-brain-api`
-- start the site `smart-brain`
-
-## How to use
+![smart-brain-demo_Moment](README.assets/smart-brain-demo_Moment.jpg)
 
 Enter image URL and click detect button to recognize faces!
+
+
+
+see live: https://smart-brain-bridget462.herokuapp.com/
+
+
+
+## features
+
+- sing in / register
+- user separated database
